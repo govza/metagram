@@ -6,12 +6,30 @@ Main metagrams computing script
 import argparse
 import os
 import sys
+from collections import defaultdict
 
 
 class Metagram:
+    dictionary_graph = defaultdict(list)
+
     def __init__(self, first, last):
         self.first = first
         self.last = last
+        self.get_dictionary(first, last)
+        print(self.dictionary_graph)
+
+    def get_dictionary(self, first, last):
+        '''Creates dictionary of words with length of words given
+        where key is word and value is list where edges can be added'''
+
+        assert len(first) == len(last), \
+            u"Length of both words should be the same"
+
+        with open(f"{os.path.dirname(__file__)}/words.txt") as filehandle:
+            for line in filehandle:
+                word_from_file = line[:-1]
+                if len(word_from_file) == len(first):
+                    self.dictionary_graph[word_from_file]
 
 
 def find(words):
