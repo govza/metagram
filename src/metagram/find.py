@@ -16,6 +16,8 @@ class Metagram:
         self.first = first
         self.last = last
         self.get_dictionary(first, last)
+        self.add_edges_to_dictionary()
+
         print(self.dictionary_graph)
 
     def get_dictionary(self, first, last):
@@ -30,6 +32,22 @@ class Metagram:
                 word_from_file = line[:-1]
                 if len(word_from_file) == len(first):
                     self.dictionary_graph[word_from_file]
+
+    def add_edges_to_dictionary(self):
+        '''Add edges from word to word with only one letter difference'''
+        for word in self.dictionary_graph:
+            for comparison_word in self.dictionary_graph:
+                if word is comparison_word:
+                    continue
+                else:
+                    same_letters = 0
+                    for idx, char in enumerate(word):
+                        '''Check if words have same letters in same postions'''
+                        if char == comparison_word[idx]:
+                            same_letters += 1
+                    if same_letters == len(word) - 1:
+                        '''If only one letter difference add word to list'''
+                        self.dictionary_graph[word].append(comparison_word)
 
 
 def find(words):
