@@ -6,19 +6,22 @@ Main metagrams computing script
 import argparse
 import os
 import sys
-from collections import defaultdict
+from collections import defaultdict, deque
 
 
 class Metagram:
     dictionary_graph = defaultdict(list)
+    shortest_path = []
+
+    def __str__(self):
+        return str(self.shortest_path)
 
     def __init__(self, first, last):
         self.first = first
         self.last = last
         self.get_dictionary(first, last)
         self.add_edges_to_dictionary()
-
-        print(self.dictionary_graph)
+        self.shortest_path = self.find_shortest_path()
 
     def get_dictionary(self, first, last):
         '''Creates dictionary of words with length of words given
@@ -49,9 +52,31 @@ class Metagram:
                         '''If only one letter difference add word to list'''
                         self.dictionary_graph[word].append(comparison_word)
 
+    def find_shortest_path(self):
+        '''Find shortest path from first to last in graph,
+        using bread-first search.'''
+
+        visited = {self.first: None}
+        queue = deque([self.first])
+
+        while queue:
+            node = queue.popleft()
+            if node == self.last:
+                path = []
+                while node is not None:
+                    path.append(node)
+                    node = visited[node]
+                return path[::-1]
+
+            for neighbour in self.dictionary_graph[node]:
+                if neighbour not in visited:
+                    visited[neighbour] = node
+                    queue.append(neighbour)
+        return queue
+
 
 def find(words):
-    metagram = str(Metagram(words[0], words[1]))
+    metagram = Metagram(words[0], words[1])
     return metagram
 
 
