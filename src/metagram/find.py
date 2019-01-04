@@ -6,6 +6,7 @@ Main metagrams computing script
 import argparse
 import os
 import sys
+import time
 from collections import defaultdict, deque
 
 
@@ -93,10 +94,12 @@ def main(args):
     Args:
       args ([str]): command line parameter list
     """
+    start_time = time.time()
+
     args = parse_args(args)
     assert len(args.words) == 2, "Specify two words to build chain"
-
-    print(f"The metagrams are {find(args.words)}.")
+    print(f"The metagrams are: {find(args.words)}.")
+    print(f"--- {round(time.time() - start_time, 2)} seconds ---")
 
 
 def run():
