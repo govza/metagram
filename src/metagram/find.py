@@ -14,7 +14,7 @@ class Metagram:
     shortest_path = []
 
     def __str__(self):
-        return str(self.shortest_path)
+        return ", ".join(self.shortest_path)
 
     def __init__(self, first, last):
         self.first = first
