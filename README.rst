@@ -8,9 +8,9 @@ Description
 
 Enter two words of same length and find their orthographic neighbor.
 
-For example for words:
+For example word chains for words:
 
-c o l d and w a r m 
+c o l d  and  w a r m 
 
 they can be
 
@@ -21,4 +21,7 @@ w a r d
 w a r m
 
 
-Install package via python setup.py install & run install
+Install package via python setup.py install
+& run install like for example:
+
+metagram cold warm
