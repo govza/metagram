@@ -10,18 +10,14 @@ Enter two words of same length and find their orthographic neighbor.
 
 For example word chains for words:
 
-c o l d  and  w a r m 
+cold and warm 
 
-they can be
+cold, co\ **r**\d, **w**\ord, w\ **a**\rd, war\ **m**
 
-c o l d
-c o r d
-w o r d
-w a r d
-w a r m
-
-
+Usage
+=====
 Install package via python setup.py install
-& run install like for example:
+
+Run package, for example, for words cold and warm:
 
 metagram cold warm
